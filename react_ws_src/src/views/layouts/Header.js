@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Link } from 'react-router'
-// import jquery from 'jquery'
+// import logo from '../../img/react_sha.png'
 
 import MessageBar from '../layouts/MessageBar'
 
@@ -15,7 +15,7 @@ export default class Header extends Component {
 		return (
 			<header id='main_header'>
 				<div id='brand'>
-					<div className='container'>
+					<div className='header_container'>
 
 						<Link to={app.settings.ws_conf.header.head_l_logo.u} className='logo-tl'>
 							<img src={app.settings.ws_conf.header.head_l_logo.i} />
@@ -32,10 +32,11 @@ export default class Header extends Component {
 									app.settings.ws_conf.main_menu.pages.p.map(function (p, i) {
 										return (
 											<li key={i}>
-												<Link 	to={p.u} >
+												<Link to={p.u} >
 													<i className={'fa fa-2x '+p.ico} aria-hidden="true"></i>
-													{p.name}
+									
 												</Link>
+												<span className='nav-name'>{p.name}</span>
 											</li>
 										)
 									})

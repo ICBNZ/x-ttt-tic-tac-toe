@@ -1,5 +1,5 @@
 {
-	"name": "XTTT-node-socket",
+	"name": "xttt-node-socket",
 	"description": "X Tic Tac Toe game demo server with Node.js, Express, and Socket.io",
 	"version": "0.0.1",
 	"author": "Maxim Shklyar, kisla interactive, <maxim@kisla.com>",

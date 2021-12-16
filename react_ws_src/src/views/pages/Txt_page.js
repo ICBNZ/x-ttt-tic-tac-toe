@@ -25,7 +25,6 @@ export default class Txt_page extends Component {
 		return (
 			<section id='Txt_page'>
 				<div id='page-container'>
-					<h1>{page_x.pg_name}</h1>
 
 					<div dangerouslySetInnerHTML={{__html: page_x.txt.__cdata}} />
 
@@ -34,11 +33,11 @@ export default class Txt_page extends Component {
 						(new X2JS()).asArray(page_x.btns.b).map(function (b, i) {
 							console.log(b)
 							return (
-									<Link to={b.u} key={i} >
-										<button type='submit' className='button'>
-											<span>{b.txt} <span className='fa fa-caret-right'></span></span>
-										</button>
-									</Link>
+								<Link to={b.u} key={i} >
+									<div className="btn-main">
+										<span>{b.txt} <span className='fa fa-caret-right'></span></span>
+									</div>
+								</Link>
 							)
 						})
 					}

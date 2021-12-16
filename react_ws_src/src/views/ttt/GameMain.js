@@ -7,7 +7,7 @@ import TweenMax from 'gsap'
 import rand_arr_elem from '../../helpers/rand_arr_elem'
 import rand_to_fro from '../../helpers/rand_to_fro'
 
-export default class SetName extends Component {
+export default class GameMain extends Component {
 
 	constructor (props) {
 		super(props)
@@ -31,7 +31,9 @@ export default class SetName extends Component {
 				cell_vals: {},
 				next_turn_ply: true,
 				game_play: true,
-				game_stat: 'Start game'
+				game_stat: 'Start game',
+				count: 0,
+				reset_game: this.reset_game.bind(this)
 			}
 		else {
 			this.sock_start()
@@ -40,7 +42,9 @@ export default class SetName extends Component {
 				cell_vals: {},
 				next_turn_ply: true,
 				game_play: false,
-				game_stat: 'Connecting'
+				game_stat: 'Connecting',
+				count: 0,
+				reset_game: this.reset_game.bind(this)
 			}
 		}
 	}
@@ -107,42 +111,27 @@ export default class SetName extends Component {
 
 	render () {
 		const { cell_vals } = this.state
-		// console.log(cell_vals)
 
 		return (
 			<div id='GameMain'>
-
-				<h1>Play {this.props.game_type}</h1>
-
+			
 				<div id="game_stat">
-					<div id="game_stat_msg">{this.state.game_stat}</div>
-					{this.state.game_play && <div id="game_turn_msg">{this.state.next_turn_ply ? 'Your turn' : 'Opponent turn'}</div>}
-				</div>
+					<h4>{this.state.game_stat != 'Play' && this.state.game_stat}</h4>
+					{this.state.game_play && <h4>{this.state.next_turn_ply ? 'Your turn' : 'Opponent turn'}</h4>}
 
+				</div>
+			
 				<div id="game_board">
-					<table>
-					<tbody>
-						<tr>
-							<td id='game_board-c1' ref='c1' onClick={this.click_cell.bind(this)}> {this.cell_cont('c1')} </td>
-							<td id='game_board-c2' ref='c2' onClick={this.click_cell.bind(this)} className="vbrd"> {this.cell_cont('c2')} </td>
-							<td id='game_board-c3' ref='c3' onClick={this.click_cell.bind(this)}> {this.cell_cont('c3')} </td>
-						</tr>
-						<tr>
-							<td id='game_board-c4' ref='c4' onClick={this.click_cell.bind(this)} className="hbrd"> {this.cell_cont('c4')} </td>
-							<td id='game_board-c5' ref='c5' onClick={this.click_cell.bind(this)} className="vbrd hbrd"> {this.cell_cont('c5')} </td>
-							<td id='game_board-c6' ref='c6' onClick={this.click_cell.bind(this)} className="hbrd"> {this.cell_cont('c6')} </td>
-						</tr>
-						<tr>
-							<td id='game_board-c7' ref='c7' onClick={this.click_cell.bind(this)}> {this.cell_cont('c7')} </td>
-							<td id='game_board-c8' ref='c8' onClick={this.click_cell.bind(this)} className="vbrd"> {this.cell_cont('c8')} </td>
-							<td id='game_board-c9' ref='c9' onClick={this.click_cell.bind(this)}> {this.cell_cont('c9')} </td>
-						</tr>
-					</tbody>
-					</table>
+					{[...Array(9)].map((e, i) => <div className="box" key={i} id={`game_board-c${i+1}`} ref={`c${i+1}`} onClick={this.click_cell.bind(this)}>
+					{this.cell_cont(`c${i+1}`)}</div>)}
 				</div>
 
-				<button type='submit' onClick={this.end_game.bind(this)} className='button'><span>End Game <span className='fa fa-caret-right'></span></span></button>
-
+				<div className="game_sidebar">
+					<h2>Games Left {this.props.game_rounds - this.state.count}</h2>
+					<button type='submit' onClick={this.end_game.bind(this)} className='button'><span>End Game <span className='fa fa-caret-right'></span></span></button>
+				</div>
+				
+		
 			</div>
 		)
 	}
@@ -176,7 +165,6 @@ export default class SetName extends Component {
 
 		TweenMax.from(this.refs[cell_id], 0.7, {opacity: 0, scaleX:0, scaleY:0, ease: Power4.easeOut})
 
-
 		// this.setState({
 		// 	cell_vals: cell_vals,
 		// 	next_turn_ply: false
@@ -185,13 +173,13 @@ export default class SetName extends Component {
 		// setTimeout(this.turn_comp.bind(this), rand_to_fro(500, 1000));
 
 		this.state.cell_vals = cell_vals
-
 		this.check_turn()
 	}
 
 //	------------------------	------------------------	------------------------
 
 	turn_comp () {
+		console.log("comp turn");
 
 		let { cell_vals } = this.state
 		let empty_cells_arr = []
@@ -205,12 +193,6 @@ export default class SetName extends Component {
 		cell_vals[c] = 'o'
 
 		TweenMax.from(this.refs[c], 0.7, {opacity: 0, scaleX:0, scaleY:0, ease: Power4.easeOut})
-
-
-		// this.setState({
-		// 	cell_vals: cell_vals,
-		// 	next_turn_ply: true
-		// })
 
 		this.state.cell_vals = cell_vals
 
@@ -279,6 +261,7 @@ export default class SetName extends Component {
 		let set
 		let fin = true
 
+
 		if (this.props.game_type!='live')
 			this.state.game_stat = 'Play'
 
@@ -286,41 +269,57 @@ export default class SetName extends Component {
 		for (let i=0; !win && i<this.win_sets.length; i++) {
 			set = this.win_sets[i]
 			if (cell_vals[set[0]] && cell_vals[set[0]]==cell_vals[set[1]] && cell_vals[set[0]]==cell_vals[set[2]])
-				win = true
+			win = true
 		}
-
 
 		for (let i=1; i<=9; i++) 
 			!cell_vals['c'+i] && (fin = false)
-
+		
+		
 		// win && console.log('win set: ', set)
 
-		if (win) {
-		
-			this.refs[set[0]].classList.add('win')
-			this.refs[set[1]].classList.add('win')
-			this.refs[set[2]].classList.add('win')
 
+		if (win) {
+			console.log("win");
+
+			let winner = cell_vals[set[0]]=='x' ? 'You' : 'Opponent'; // get winner
+			this.props.onSetWinner(winner);
+
+			// set class name for coloured rows
+			for(var i = 0; i < 3; i++)
+			{
+				this.refs[set[i]].classList.add(winner === 'You' ? 'player_wins':'win');
+			}
+			
+			// animations
 			TweenMax.killAll(true)
 			TweenMax.from('td.win', 1, {opacity: 0, ease: Linear.easeIn})
-
+	
+			// change status
 			this.setState({
-				game_stat: (cell_vals[set[0]]=='x'?'You':'Opponent')+' win',
-				game_play: false
+				game_stat: `${winner} won!`
 			})
 
-			this.socket && this.socket.disconnect();
+			setTimeout(() => {
+				this.reset_game(set)
+			  }, 1500);
 
-		} else if (fin) {
+		}
+		else if (fin) {
+			console.log("fin");
+
+			this.props.onSetWinner('Draw');
 		
 			this.setState({
 				game_stat: 'Draw',
-				game_play: false
 			})
 
-			this.socket && this.socket.disconnect();
+			setTimeout(() => {
+				this.reset_game(set)
+			  }, 1500);
+		}
 
-		} else {
+		else {
 			this.props.game_type!='live' && this.state.next_turn_ply && setTimeout(this.turn_comp.bind(this), rand_to_fro(500, 1000));
 
 			this.setState({
@@ -328,6 +327,34 @@ export default class SetName extends Component {
 			})
 		}
 		
+	}
+//	------------------------	------------------------	------------------------
+
+	reset_game (set) {
+
+		this.setState({
+			count: this.state.count +1
+		})
+
+		// if last game, finish
+		if(this.props.game_rounds === this.state.count) {
+		
+			this.setState({
+				game_play: false
+			})
+
+			this.socket && this.socket.disconnect();
+			this.props.onGameOver()
+		} 
+		// reset for next round
+		else {
+			for(var i = 0; i < 3; i++) 
+				this.refs[set[i]].classList.remove('player_wins', 'win');
+			
+			this.setState({ cell_vals: {}});
+			this.setState({game_stat: 'Start Game'})
+			this.check_turn()
+		}
 	}
 
 //	------------------------	------------------------	------------------------

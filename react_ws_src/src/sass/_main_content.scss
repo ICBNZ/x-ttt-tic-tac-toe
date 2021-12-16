@@ -1,78 +1,158 @@
 .main_container {
-	max-width: 700px;
-	margin: 50px auto;
-	position:relative;
-	padding:0 30px;
+  @include flexbox(center);
+  min-height: 60%;
+  margin: 10%;
+  padding: 5%;
+  background-color: $colorPrimaryDark;
+  position: relative;
 
-	color: #333;
-	font-family: $bodyFont;
-	@include font-size(16px);
+  color: #fff;
+  font-family: $bodyFont;
+  @include font-size(16px);
 
-	.button {
-		@include button(179px,50px,4px,$colorSecondary,$colorSecondaryDark,#fff);
-		font-family: $hdrFont;
-		@include font-size(16px);
-		margin-top:24px;		
-	}
+  h1 {
+    font-family: $titleFont;
+    letter-spacing: 0.1em;
+    font-weight: 500;
+    margin-top: 0;
+  }
+  h2 {
+    margin-bottom: 1em;
+  }
 
-	i {
-		font-family: "FontAwesome";
-	}
+  i {
+    font-family: "FontAwesome";
+    color: #fff;
+  }
 
-	a {
-		// color: #ccc;
-		font-weight: 800;
-		font-style: italic;			
+  a {
+    font-weight: 500;
+    color: $colorHighlightBlue;
+    letter-spacing: 0.05em;
+    &:hover {
+      opacity: 0.5;
+    }
+  }
+  p {
+    @include font-size(18px);
+    letter-spacing: 0.05em;
+    line-height: 2em;
+  }
 
-	}
-
-	hr {
-		margin-top: 10px;
-		margin-bottom: 10px;
-	}
-
+  hr {
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
 }
 
+.simple_list {
+  list-style-type: none;
+  padding: 12px;
+  width: 100%;
 
-.simple_list{
-	list-style-type: none;
-	padding: 12px;
+  li {
+    margin: 5px;
+    // @include font-size(18px);
 
-	li {
-		margin: 5px;
-		// @include font-size(18px);
-
-		label {
-			padding-left: 20px;
-		} 
-	}
+    label {
+      padding-left: 20px;
+    }
+  }
 }
 
-.types_selector{
-	list-style-type: none;
-	padding: 20px;
+.types_selector {
+  list-style-type: none;
+  padding: 20px;
 
-	li {
-		margin: 15px;
-		@include font-size(20px);
+  li {
+    margin: 15px;
+    @include font-size(20px);
 
-		label {
-			padding-left: 10px;
-		} 
-	}
+    label {
+      padding-left: 10px;
+    }
+  }
 }
 
+#input_basket_total {
+  color: #000;
+  margin: 15px;
+  width: 200px;
+  height: 50px;
+  padding: 5px 20px;
+  @include font-size(30px);
+  appearance: none;
+  box-shadow: none;
+  border-radius: 5px;
+}
 
+.btn-main {
+  align-self: center;
+  background-color: transparent;
+  border: none;
+  line-height: 45px;
+  height: 45px;
+  text-align: center;
+  width: 250px;
+  cursor: pointer;
+  margin: 2.5em 0.5em 0 0.5em;
+  color: #fff;
+  @include transition(all 0.3s ease-in-out);
+  position: relative;
+  &.type {
+    height: 100px;
+    @include font-size(20px);
+    &:after {
+      background-color: rgba(40, 133, 138, 0.4);
+    }
+  }
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transition: all 0.3s;
+    border-top: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transform: scale(0.1, 1);
+    opacity: 0;
+  }
+  &:hover::before {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.2);
+    @include transition(all 0.3s ease-in-out);
+  }
+  &:hover::after {
+    opacity: 0;
+    transform: scale(0.1, 1);
+  }
+}
+#Txt_page {
+  margin: 0 20%;
+  max-width: 400px;
+}
+#page-container {
+  text-align: center;
+  h4,
+  h2 {
+    margin-top: 2em;
+  }
+  @include flexbox(center);
+}
 
-	#input_basket_total {
-		color: #000;
-		margin: 15px;
-		width: 200px;
-		height: 50px;
-		padding: 5px 20px;
-		@include font-size(30px);
-		appearance: none;
-		box-shadow: none;
-		border-radius: 5px;
-	}
-
+@media only screen and (max-width: 900px) {
+  .main_container {
+    margin: 20% 2%;
+  }
+}

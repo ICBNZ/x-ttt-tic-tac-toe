@@ -1,166 +1,270 @@
-section#TTT_game{
+section#TTT_game {
+  width: 100%;
 
-	.input_holder{
-		width:50%;
-		//color:#959595;
-		margin-bottom: 25px;
+  .input_holder {
+    &.message {
+      width: 100%;
+      margin-bottom: 0;
+    }
 
-		&.message {
-			width: 100%;
-			margin-bottom: 0;
-		}
+    label {
+      @include font-size(16px);
+      display: block;
+      margin-bottom: 11px;
+      width: 100%;
+      font-weight: 300;
 
-		label {
-			@include font-size(16px);
-			display: block;
-			margin-bottom: 11px;
-			width: 100%;
-			font-weight: 300;
+      span.required {
+        display: none;
+      }
+    }
 
-			span.required {
-				display: none;
-			}
-		}
+    .input {
+      @include textInput(80%);
+      border: none;
+      border-radius: 0;
+      background-color: transparent;
+      color: #fff;
+      border-bottom: 1px solid $colorPrimaryLight;
+      box-shadow: none;
+    }
+    .input.password {
+      @include textInput(90%);
+      border: 1px solid $colorPrimaryLight;
+    }
+    .input.textarea {
+      @include textInput(95%);
+      border: 1px solid $colorPrimaryLight;
+      height: 100px;
+      line-height: 1.5em;
+      padding-top: 10px;
+    }
 
-		.input {
-			@include textInput(90%);
-			border: 1px solid #ebe6f1;
-		}
-		.input.password{
-			@include textInput(90%);
-			border: 1px solid #ebe6f1;
-		}
-		.input.textarea {
-			@include textInput(95%);
-			border: 1px solid #ebe6f1;
-			height: 100px;
-			line-height:1.5em;
-			padding-top:10px;
-		}
+    &.select_option select {
+      border-radius: 7px;
+      border: none;
+      padding: 0 18px;
+      height: 46px;
+      background: #fff;
+      border: 1px solid $colorPrimaryLight;
+      box-shadow: 0px 4px 0px 0px $colorPrimaryLight;
+      color: #888888;
+      font-style: italic;
+      @include font-size(18px);
+      font-weight: 300;
+      width: 90%;
+    }
+    &.error {
+      label {
+        .required {
+          display: inline;
+          color: $colorSecondary;
+        }
+      }
+      .input {
+        @include textInput(90%);
+        border: 1px solid $colorSecondary;
+        color: $colorSecondary;
+      }
+      .input.textarea {
+        @include textInput(95%);
+        border: 1px solid $colorSecondary;
+        height: 100px;
+        line-height: 1.5em;
+        padding-top: 10px;
+      }
+      ::-webkit-input-placeholder {
+        /* WebKit, Blink, Edge */
+        color: $colorSecondary;
+      }
+      :-moz-placeholder {
+        /* Mozilla Firefox 4 to 18 */
+        color: $colorSecondary;
+        opacity: 1;
+      }
+      ::-moz-placeholder {
+        /* Mozilla Firefox 19+ */
+        color: $colorSecondary;
+        opacity: 1;
+      }
+      :-ms-input-placeholder {
+        /* Internet Explorer 10-11 */
+        color: $colorSecondary;
+      }
+      :placeholder-shown {
+        /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
+        color: $colorSecondary;
+      }
+    }
 
-		&.select_option select{
-			border-radius: 7px;
-		  border:none;
-		  padding:0 18px;
-		  height: 46px;
-		  background:#fff;
-		  border: 1px solid #ebe6f1;
-		  box-shadow:0px 4px 0px 0px #ebe6f1;
-		  color: #888888;
-		  font-style: italic;
-		  @include font-size(18px);
-		  font-weight: 300;
-			width: 90%;
-		}
-		&.error {
-			label{
-				.required {
-					display: inline;
-					color:$colorSecondary;
-				}
-			}
-			.input {
-					@include textInput(90%);
-					border: 1px solid $colorSecondary;
-					color: $colorSecondary;
-			}
-			.input.textarea {
-					@include textInput(95%);
-					border: 1px solid $colorSecondary;
-					height: 100px;
-					line-height:1.5em;
-					padding-top:10px;
-			}				
-			::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-			    color:    $colorSecondary;
-			}
-			:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-			   color:    $colorSecondary;
-			   opacity:  1;
-			}
-			::-moz-placeholder { /* Mozilla Firefox 19+ */
-			   color:    $colorSecondary;
-			   opacity:  1;
-			}
-			:-ms-input-placeholder { /* Internet Explorer 10-11 */
-			   color:    $colorSecondary;
-			}
-			:placeholder-shown { /* Standard (https://drafts.csswg.org/selectors-4/#placeholder) */
-			  color:    $colorSecondary;
-			}							
-		}
+    &.select_option.error select {
+      border: 1px solid $colorSecondary;
+      //box-shadow:0px 4px 0px 0px $colorSecondary;
+      color: $colorSecondary;
+    }
+  }
 
-		&.select_option.error select{
-		  border: 1px solid $colorSecondary;
-		  //box-shadow:0px 4px 0px 0px $colorSecondary;
-		  color: $colorSecondary;
-		}			
-	}
+  .button {
+    @include button(
+      179px,
+      50px,
+      4px,
+      $colorSecondary,
+      $colorSecondaryDark,
+      #fff
+    );
+    font-family: $hdrFont;
+    @include font-size(18px);
+    // margin-top: 24px;
 
-	.button {
-		@include button(179px,50px,4px,$colorSecondary,$colorSecondaryDark,#fff);
-		font-family: $hdrFont;
-		@include font-size(18px);
-		margin-top:24px;
+    &.long {
+      width: 300px;
+    }
+  }
 
-		&.long {
-			width: 300px;
-		}	
-	}
+  .game-sidebar {
+    position: absolute;
+    bottom: 10%;
+    left: 0;
+    z-index: 10;
+    width: 18%;
+    max-width: 220px;
+    color: #fff;
+    font-weight: 500;
+    text-align: center;
+    button {
+      margin-top: 2em;
+      max-width: 150px;
+    }
+  }
 
-	#game_stat {
-		background: #eee;
-		margin: 10px;
-		width: 300px;
-		height: 90px;
-		vertical-align: middle;
-		text-align: center;
-		padding-top: 10px;
-		font-family: $hdrFont;
+  #game_stat {
+    @include flexbox(space-between);
+    font-family: $hdrFont;
+    h4 {
+      color: #fff;
+      @include font-size(22px);
+      font-weight: 500;
+      margin-right: 2em;
+      &:nth-child(2) {
+        color: $colorSecondaryLightBlue;
+        font-weight: 300;
+        @include font-size(20px);
+      }
+    }
+  }
+  #GameMain {
+    flex-basis: 70%;
+    @include flexbox(center);
+    flex-direction: column;
+  }
 
-		#game_stat_msg {
-			@include font-size(28px);
-		}
+  #game_board {
+    margin-top: 50px;
+    @include flexbox(space-between);
+    width: 450px;
+    height: 450px;
+    box-shadow: rgba(255, 255, 255, 0.3) 0px 19px 38px,
+      rgba(255, 255, 255, 0.22) 0px 15px 12px;
 
-		#game_turn_msg {
-			padding-top: 5px;
-			@include font-size(22px);
-		}
-	}
+    .box {
+      background: transparent;
+      box-shadow: rgba(255, 255, 255, 0.3) 0px 2px 5px,
+        rgba(255, 255, 255, 0.22) 0px 2px 10px;
 
-	#game_board {
-			// padding: 10px;
+      width: 150px;
+      height: 150px;
 
-		table {
-			background: #fff;
-			margin: 10px;
-		}
+      vertical-align: middle;
+      text-align: center;
+      @include transition(all 1s ease-in-out);
+      > div {
+        @include flexbox(center);
+        height: 100%;
+        width: 100%;
+        i {
+          flex: 1;
+          align-self: center;
+        }
+      }
+      &:hover {
+        cursor: pointer;
+        background: rgba(255, 255, 255, 0.5);
+      }
 
-		td {
-			width: 130px;
-			height: 130px;
+      &.win {
+        background: #986198;
+      }
+      &.player_wins {
+        background: #28858a;
+      }
+    }
+  }
+  #game_banner {
+    background-color: #0c3884;
+    position: absolute;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    flex-basis: 18%;
+    min-width: 220px;
+    height: 100%;
+    color: $colorSecondaryLight;
+    padding: 5% 2%;
+    h5 {
+      margin-bottom: 1em;
+      @include font-size(20px);
+      color: rgba(255, 255, 255, 0.9);
+    }
+  }
+  #score {
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 5% 20%;
+    margin-top: 2em;
+    h4 {
+      margin-bottom: 1.5em;
+      font-weight: 500;
+      @include font-size(22px);
+      &:nth-child(2) {
+        color: #28858a;
+      }
+      &:nth-child(3) {
+        color: #986198;
+      }
+    }
+  }
+  @media only screen and (max-width: 1200px) {
+    #game_banner {
+      position: relative;
+      width: 100%;
+    }
+    .game-sidebar {
+      position: relative;
+      width: 100%;
+    }
+    #GameMain {
+      padding-left: 0;
+    }
+    #game_board {
+      margin-bottom: 10vh;
+    }
+    #game_stat {
+      margin-top: 2em;
+    }
+  }
 
-			vertical-align: middle;
-			text-align: center;
+  @media only screen and (max-width: 800px) {
+    #game_board {
+      width: 80vw;
+      height: 80vw;
 
-			&:hover{
-				background: #ff0;
-			}
-
-			&.win {
-				background: #f00;
-			}
-		}
-
-		.vbrd {
-			border-left: 7px solid #000;
-			border-right: 7px solid #000;
-		}
-
-		.hbrd {
-			border-top: 7px solid #000;
-			border-bottom: 7px solid #000;
-		}
-	}
-
+      .box {
+        width: 33%;
+        height: 33%;
+      }
+    }
+  }
 }

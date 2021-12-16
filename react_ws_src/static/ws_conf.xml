@@ -53,7 +53,7 @@
 			<i 		tp='txt'		txt='Copyright © 2016 kisla interactive'	/>
 			<i 		tp='ln'			txt='terms and conditions'		u='pupg/terms-and-conditions'	/>
 			<i 		tp='ln'			txt='privacy'					u='pupg/privacy-policy'	/>
-			<i 		tp='ln'			txt='contact us'				u='contact-us'	/>
+			<i 		tp='ln'			txt='contact'				u='contact-us'	/>
 		</items>
 		<foot_msg		txt='A simple Tic Tac Toe game demo built with React.js and Node.js.'	/>
 		<foot_r_logo	i='images/K_logo.png'	u='http://www.kisla.com'	t='_blank'		/>
@@ -71,10 +71,9 @@
 		<home		pg_name="Home">
 			<txt>
 			<![CDATA[
-				<div>This is a simple X Tic Tac Toe multiplayer demo game. It's built with React.js and Node.js.</div>
+				<h2>This is a simple website built with React.js.</h2>
 				
-				<div>
-				view source at  <a href='https://github.com/xims/X-ttt'>github.com/xims/X-ttt</a></div>
+				<h3>View source at  <a href='https://github.com/xims/X-react-starter'>github.com/xims/X-react-starter</a></h3>
 
 				<br/>
 				<h4>For demonstration purposes.</h4>
@@ -94,10 +93,9 @@
 			<![CDATA[
 		<section id='info'>
 			<div id='page-container'>
-				<h3>This is a simple example of React.js and Node.js stack based web app</h3>
-
+				<h3>This is a simple example of React.js stack based website</h3>
 				<br/>
-				<h4>Front End - major libraries used:</h4>
+				<h4>Major libraries used:</h4>
 				<ul class='simple_list'>
 					<li>react</li>
 					<li>webpack</li>
@@ -106,14 +104,6 @@
 					<li>ampersand</li>
 					<li>sass</li>
 					<li>jest</li>
-				</ul>
-
-				<br/>
-				<h4>Server - major libraries used:</h4>
-				<ul class='simple_list'>
-					<li>node.js</li>
-					<li>socket.io</li>
-					<li>express</li>
 				</ul>
 
 				<br/>
