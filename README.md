@@ -1,10 +1,5 @@
-# A simple example of a full multiplayer game web app built with React.js and Node.js stack
+Multiplayer game web app built with React.js and Node.js stack
+Updates to template: game rounds, scores, games left, winner screen, mapping, images, styling
 
-Major libraries used on front end:
-- react
-- webpack
-- babel
-- react-router
-- ampersand
-- sass
-- jest
+
+
